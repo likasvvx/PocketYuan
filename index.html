@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PocketYuan — Student Budget</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="phone-container">
+
+    <div id="welcomeOverlay" class="welcome-overlay hidden">
+      <div class="welcome-card">
+        <div class="welcome-icon">🐉✨</div>
+        <h2>Hi! Welcome to PocketYuan</h2>
+        <p class="welcome-lead">Your smart budget companion for studying in China:</p>
+        <ul class="welcome-list">
+          <li>💰 <b>Add Income & Expenses:</b> Log your stipend or transfers in CNY, RUB, or USD with auto-conversion.</li>
+          <li>📊 <b>Category Limits:</b> Big one-time purchases won't trigger false alarms as long as you stay within monthly limits.</li>
+          <li>⚙️ <b>Settings & Theme:</b> Customize category quotas, exchange rates, and switch between Light & Dark mode.</li>
+          <li>💜 <b>Interactive Dragon:</b> Watch your mascot cheer when you save and get sad if you overspend!</li>
+        </ul>
+        <button class="save-btn" onclick="closeWelcome()">Let's Start 🚀</button>
+        <p class="author-credit">This app was created by first-year student Malika.</p>
+      </div>
+    </div>
+
+    <div id="homeScreen">
+      <header class="top-bar">
+        <div>
+          <span class="badge">🇨🇳 International Student</span>
+          <h1>PocketYuan</h1>
+        </div>
+        <button class="icon-btn" onclick="openSettingsScreen()" title="Settings">⚙️</button>
+      </header>
+
+      <div class="balance-card">
+        <div class="balance-top">
+          <span>Available Balance</span>
+          <span id="daysBadge" class="pill">30 days left</span>
+        </div>
+
+        <div class="dragon-stage">
+          <div id="dragonSparkles" class="sparkles">✨ 💰 ✨</div>
+          <div id="dragonMascot" class="dragon idle" onclick="petDragon()" title="Tap me!">
+            <svg viewBox="0 0 140 130" width="118" height="110" xmlns="http://w3.org">
+              <path class="d-tail" d="M95 95 Q122 92 126 74 Q120 82 114 80 Q118 68 110 68 Q106 82 90 86 Z" fill="#C4B5FD" stroke="#6D28D9" stroke-width="2.5" stroke-linejoin="round"/>
+              <path class="d-wing-l" d="M44 64 Q16 42 18 66 Q26 62 30 70 Q36 66 42 74 Z" fill="#DDD6FE" stroke="#6D28D9" stroke-width="2.5" stroke-linejoin="round"/>
+              <path class="d-wing-r" d="M96 64 Q124 42 122 66 Q114 62 110 70 Q104 66 98 74 Z" fill="#DDD6FE" stroke="#6D28D9" stroke-width="2.5" stroke-linejoin="round"/>
+              <ellipse cx="70" cy="86" rx="28" ry="26" fill="#EDE9FE" stroke="#6D28D9" stroke-width="2.5"/>
+              <ellipse cx="70" cy="89" rx="17" ry="18" fill="#FFFFFF" opacity="0.85"/>
+              <ellipse cx="53" cy="108" rx="9" ry="6" fill="#DDD6FE" stroke="#6D28D9" stroke-width="2.5"/>
+              <ellipse cx="87" cy="108" rx="9" ry="6" fill="#DDD6FE" stroke="#6D28D9" stroke-width="2.5"/>
+              <path d="M52 26 Q46 10 56 14 Q60 18 58 26 Z" fill="#FDE68A" stroke="#6D28D9" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M88 26 Q94 10 84 14 Q80 18 82 26 Z" fill="#FDE68A" stroke="#6D28D9" stroke-width="2.2" stroke-linejoin="round"/>
+              <path class="d-ear-l" d="M44 36 Q26 28 32 44 Q38 46 45 43 Z" fill="#C4B5FD" stroke="#6D28D9" stroke-width="2.3" stroke-linejoin="round"/>
+              <path class="d-ear-r" d="M96 36 Q114 28 108 44 Q102 46 95 43 Z" fill="#C4B5FD" stroke="#6D28D9" stroke-width="2.3" stroke-linejoin="round"/>
+              <ellipse cx="70" cy="46" rx="28" ry="23" fill="#EDE9FE" stroke="#6D28D9" stroke-width="2.5"/>
+              <ellipse cx="50" cy="52" rx="5" ry="3" fill="#F9A8D4" opacity="0.75"/>
+              <ellipse cx="90" cy="52" rx="5" ry="3" fill="#F9A8D4" opacity="0.75"/>
+              <g class="eyes-normal">
+                <circle cx="56" cy="44" r="5" fill="#1E1B4B"/>
+                <circle cx="54.5" cy="42.5" r="1.8" fill="#FFFFFF"/>
+                <circle cx="84" cy="44" r="5" fill="#1E1B4B"/>
+                <circle cx="82.5" cy="42.5" r="1.8" fill="#FFFFFF"/>
+              </g>
+              <g class="eyes-happy">
+                <path d="M50 45 Q56 38 62 45" fill="none" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round"/>
+                <path d="M78 45 Q84 38 90 45" fill="none" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g class="eyes-sad">
+                <circle cx="56" cy="46" r="4.5" fill="#1E1B4B"/>
+                <circle cx="84" cy="46" r="4.5" fill="#1E1B4B"/>
+                <path d="M49 39 L61 42" stroke="#6D28D9" stroke-width="2.3" stroke-linecap="round"/>
+                <path d="M91 39 L79 42" stroke="#6D28D9" stroke-width="2.3" stroke-linecap="round"/>
+                <circle class="tear" cx="51" cy="52" r="2.2" fill="#60A5FA"/>
+              </g>
+              <path class="mouth-normal" d="M65 54 Q70 58 75 54" fill="none" stroke="#6D28D9" stroke-width="2.3" stroke-linecap="round"/>
+              <path class="mouth-happy" d="M63 53 Q70 63 77 53 Z" fill="#F472B6" stroke="#6D28D9" stroke-width="2" stroke-linejoin="round"/>
+              <path class="mouth-sad" d="M64 58 Q70 53 76 58" fill="none" stroke="#6D28D9" stroke-width="2.3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span id="dragonMoodText" class="mood-pill">Ready to save some yuan! 🐉</span>
+        </div>
+
+        <h2 id="balanceDisplay">0.00 ¥</h2>
+        <div class="progress-wrap">
+          <div id="progressBar" class="progress-fill"></div>
+        </div>
+        <div class="balance-stats">
+          <div>
+            <small>Safe Daily Limit</small>
+            <strong id="dailyLimitDisplay">0 ¥ / day</strong>
+          </div>
+          <div>
+            <small>Total Spent</small>
+            <strong id="totalSpentDisplay">0 ¥</strong>
+          </div>
+        </div>
+      </div>
+
+      <div id="aiInsight" class="insight-card mint">
+        ✨ Add your stipend or parents' transfer (RUB/USD auto-converts to CNY).
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-expense" onclick="openModal('expense')">− Add Expense</button>
+        <button class="btn-income" onclick="openModal('income')">+ Add Income</button>
+      </div>
+
+      <div class="section-header">
+        <h3>Category Limits</h3>
+        <button class="link-btn" onclick="openSettingsScreen()">Edit limits</button>
+      </div>
+      <div id="categoryLimitsBox" class="cat-grid"></div>
+
+      <div class="section-header" style="margin-top: 22px;">
+        <h3>Recent Activity</h3>
+      </div>
+      <div id="activityFeed" class="feed"></div>
+    </div>
+
+    <div id="settingsScreen" class="hidden">
+      <header class="settings-header">
+        <button class="back-btn" onclick="closeSettingsScreen()">← Back</button>
+        <h2>Settings</h2>
+        <div style="width: 64px;"></div>
+      </header>
+
+      <div class="settings-card">
+        <div class="theme-row">
+          <div>
+            <strong class="setting-title">Appearance</strong>
+            <span class="muted-text" style="display:block;">Switch light or dark theme</span>
+          </div>
+          <button id="themeToggleBtn" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h4 class="sub-head" style="margin-top: 0;">Stipend & Exchange Rates</h4>
+        <label>Days until next stipend</label>
+        <input type="number" id="setDays" value="30">
+
+        <div class="rate-row">
+          <div>
+            <label>1 RUB → CNY</label>
+            <input type="number" id="setRubRate" step="0.001" value="0.075">
+          </div>
+          <div>
+            <label>1 USD → CNY</label>
+            <input type="number" id="setUsdRate" step="0.01" value="7.15">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h4 class="sub-head" style="margin-top: 0;">Monthly Category Limits (CNY)</h4>
+        <div id="limitInputs"></div>
+      </div>
+
+      <button class="save-btn" onclick="saveSettings()">Save & Return</button>
+      <button class="secondary-outline-btn" onclick="showWelcomeAgain()">Show Welcome Guide</button>
+      <button class="danger-btn" onclick="resetAll()">Reset All Data</button>
+    </div>
+
+  </div>
+
+  <div id="txModal" class="modal hidden">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <h3 id="modalTitle">Add Expense</h3>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <input type="hidden" id="editId">
+      <input type="hidden" id="txType">
+
+      <label>Amount</label>
+      <div class="amount-row">
+        <input type="number" id="txAmount" placeholder="0.00" inputmode="decimal">
+        <select id="txCurrency">
+          <option value="CNY">CNY (¥)</option>
+          <option value="RUB">RUB (₽)</option>
+          <option value="USD">USD ($)</option>
+        </select>
+      </div>
+
+      <label>Category</label>
+      <select id="txCategory"></select>
+
+      <label>Note (optional)</label>
+      <input type="text" id="txNote" placeholder="e.g. Winter jacket, Canteen lunch">
+
+      <button class="save-btn" onclick="saveTransaction()">Save</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
