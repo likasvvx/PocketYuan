@@ -2,8 +2,6 @@
 
 **PocketYuan** is a lightweight, mobile-first progressive web application designed specifically for international students studying in China. It helps manage university stipends (**CNY**) alongside financial support from parents (**RUB** / **USD**) without stress.
 
-🔗 **Live App:** [https://github.io](https://github.io)
-
 ## ✨ Key Features
 
 - **Multi-Currency Auto-Conversion:** Log income and transfers in **CNY (¥)**, **RUB (₽)**, or **USD ($)** with customizable exchange rates.
