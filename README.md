@@ -19,7 +19,7 @@
 
 ## 📱 How to Use on Mobile
 
-1. Open [https://github.io](https://github.io) in Safari (iOS) or Chrome (Android).
+1. Open (https://likasvvx.github.io/PocketYuan/) in Safari (iOS) or Chrome (Android).
 2. Tap **Share → Add to Home Screen** (or **⋮ → Add to Home screen**) to install it as a standalone app on your phone.
 
 ---
